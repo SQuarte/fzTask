@@ -1,29 +1,29 @@
 import { Action } from '@ngrx/store';
-import { ChatMessage } from '../../../common/models/chat.model';
+import {FzChat} from '../../../common/models/chat.model';
 
 export enum ChatPageActionTypes {
-    FetchChatMessages = '[ChatPage] Fetch page',
-    FetchChatMessagesComplete = '[ChatPage] Fetch page complete',
-    FetchChatMessagesError = '[ChatPage] Fetch page error',
+    FetchChat = '[ChatPage] Fetch page',
+    FetchChatComplete = '[ChatPage] Fetch page complete',
+    FetchChatError = '[ChatPage] Fetch page error',
     AddChatMessage = '[ChatPage] Add chat message',
     AddChatMessageComplete = '[ChatPage] Add chat message complete',
     AddChatMessageError = '[ChatPage] Add chat message error'
 }
 
-export class FetchChatMessages implements Action {
-    readonly type = ChatPageActionTypes.FetchChatMessages;
+export class FetchChat implements Action {
+    readonly type = ChatPageActionTypes.FetchChat;
     constructor(public ownerId: number, public companionId: number) {
     }
 }
 
-export class FetchChatMessagesComplete implements Action {
-    readonly type = ChatPageActionTypes.FetchChatMessagesComplete;
-    constructor(public companionId: number, public chatMessages: ChatMessage[]) {}
+export class FetchChatComplete implements Action {
+    readonly type = ChatPageActionTypes.FetchChatComplete;
+    constructor(public companionId: number, public chat: FzChat) {}
 }
 
 
-export class FetchChatMessagesError implements Action {
-    readonly type = ChatPageActionTypes.FetchChatMessagesError;
+export class FetchChatError implements Action {
+    readonly type = ChatPageActionTypes.FetchChatError;
     constructor(err: any) {}
 }
 
@@ -36,20 +36,20 @@ export class AddChatMessage implements Action {
 
 export class AddChatMessageComplete implements Action {
     readonly type = ChatPageActionTypes.AddChatMessageComplete;
-    constructor(public companionId: number, public chatMessages: ChatMessage[]) {
+    constructor(public ownerId,public companionId: number) {
     }
 }
 
 export class AddChatMessageError implements Action {
     readonly type = ChatPageActionTypes.AddChatMessageError;
-    constructor() {
+    constructor(public err: any) {
     }
 }
 
 export type ChatPageActionsUnion =
-    | FetchChatMessages
-    | FetchChatMessagesComplete
-    | FetchChatMessagesError
+    | FetchChat
+    | FetchChatComplete
+    | FetchChatError
     | AddChatMessage
     | AddChatMessageComplete
     | AddChatMessageError;

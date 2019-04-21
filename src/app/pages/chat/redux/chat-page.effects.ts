@@ -3,31 +3,29 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {Observable, of} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {ChatService} from '../../../common/services/chat.service';
 import {
-    AddChatMessage,
+    AddChatMessage, AddChatMessageComplete, AddChatMessageError,
     ChatPageActionTypes,
-    FetchChatMessages,
-    FetchChatMessagesComplete,
-    FetchChatMessagesError
+    FetchChat, FetchChatComplete, FetchChatError,
 } from './chat-page.actions';
+import {FzChatService} from '../../../common/services/chat.service';
 
 
 @Injectable()
 export class ChatPageEffects {
 
     constructor(private actions$: Actions,
-                private chatService: ChatService) {}
+                private chatService: FzChatService) {}
 
 
     @Effect()
-    fetchChatMessages$: Observable<Action> = this.actions$.pipe(
-        ofType<FetchChatMessages>(ChatPageActionTypes.FetchChatMessages),
+    fetchChat$: Observable<Action> = this.actions$.pipe(
+        ofType<FetchChat>(ChatPageActionTypes.FetchChat),
         mergeMap((action) => {
-            return this.chatService.getMessages(action.ownerId, action.companionId)
+            return this.chatService.getChat(action.ownerId, action.companionId)
                 .pipe(
-                    map((messages) => new FetchChatMessagesComplete(action.companionId, messages)),
-                    catchError(err => of(new FetchChatMessagesError(err)))
+                    map((chat) => new FetchChatComplete(action.companionId, chat)),
+                    catchError(err => of(new FetchChatError(err)))
                 );
         })
     );
@@ -38,9 +36,18 @@ export class ChatPageEffects {
         mergeMap((action) => {
             return this.chatService.addMessage(action.ownerId, action.companionId, action.message)
                 .pipe(
-                    map((messages) => new FetchChatMessagesComplete(action.companionId, messages)),
-                    catchError(err => of(new FetchChatMessagesError(err)))
+                    map((messages) => new AddChatMessageComplete(action.ownerId, action.companionId)),
+                    catchError(err => of(new AddChatMessageError(err)))
                 );
+        })
+    );
+
+
+    @Effect()
+    refreshChat$: Observable<Action> = this.actions$.pipe(
+        ofType<AddChatMessageComplete>(ChatPageActionTypes.AddChatMessageComplete),
+        map((action) => {
+            return new FetchChat(action.ownerId, action.companionId)
         })
     );
 

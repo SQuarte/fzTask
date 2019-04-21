@@ -1,30 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { ChatPageComponent } from './chat.page';
 import { RouterModule } from '@angular/router';
-import {HeaderModule} from '../../common/header/header.module';
+import {FzHeaderModule} from '../../common/header/header.module';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {chatPageReducers} from './redux/chat-page.reducer';
 import {ChatPageEffects} from './redux/chat-page.effects';
 import {FormsModule} from '@angular/forms';
+import {FzChatPageComponent} from './chat.page';
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    HeaderModule,
+    FzHeaderModule,
     FormsModule,
     RouterModule.forChild([
       {
         path: '',
-        component: ChatPageComponent
+        component: FzChatPageComponent
       }
     ]),
     StoreModule.forFeature('ChatPageModule', chatPageReducers),
     EffectsModule.forFeature([ChatPageEffects])
   ],
-  declarations: [ChatPageComponent],
+  declarations: [FzChatPageComponent],
 })
-export class ChatPageModule { }
+export class FzChatPageModule { }

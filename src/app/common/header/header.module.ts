@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './components/header.component';
 import { IonicModule } from '@ionic/angular';
+import {FzHeaderComponent} from './header.component';
 
 @NgModule({
   imports: [
@@ -9,10 +9,10 @@ import { IonicModule } from '@ionic/angular';
     IonicModule,
   ],
   declarations: [
-    HeaderComponent
+    FzHeaderComponent
   ],
   exports: [
-      HeaderComponent
+    FzHeaderComponent
   ]
 })
-export class HeaderModule { }
+export class FzHeaderModule { }

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import {UserDetail} from '../models/user-detail.model';
+import {FzUserDetail} from '../models/user-detail.model';
 import {of} from 'rxjs/internal/observable/of';
 import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserDetailService {
+export class FzUserDetailService {
 
   constructor() { }
 
-  getUserById(userId: number): Observable<UserDetail> {
+  getUserById(userId: number): Observable<FzUserDetail> {
     return of(
-        new UserDetail(
+        new FzUserDetail(
             userId,
             'Almee C. Teesdale',
             this.getDescriptionForUser(),

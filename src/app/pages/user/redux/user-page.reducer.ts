@@ -1,9 +1,9 @@
-import {UserDetail} from '../../../common/models/user-detail.model';
+import {FzUserDetail} from '../../../common/models/user-detail.model';
 import {UserPageActionsUnion, UserPageActionTypes} from './user-page.actions';
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 
 export interface UserPageState {
-    users: Map<number, UserDetail>;
+    users: Map<number, FzUserDetail>;
 }
 
 const initialState: UserPageState = {

@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {IonicModule} from '@ionic/angular';
-import {UserPage} from './user.page';
 import {RouterModule} from '@angular/router';
-import {HeaderModule} from '../../common/header/header.module';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
-import {userPageReducers} from './redux/user-detail.reducer';
+import {userPageReducers} from './redux/user-page.reducer';
 import {UserPageEffects} from './redux/user-page.effects';
+import {FzUserPage} from './user.page';
+import {FzHeaderModule} from '../../common/header/header.module';
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    HeaderModule,
+    FzHeaderModule,
     RouterModule.forChild([
       {
         path: '',
-        component: UserPage
+        component: FzUserPage
       }
     ]),
     StoreModule.forFeature('UserPageModule', userPageReducers),
     EffectsModule.forFeature([UserPageEffects])
   ],
-  declarations: [UserPage]
+  declarations: [FzUserPage]
 })
-export class UserPageModule { }
+export class FzUserPageModule { }

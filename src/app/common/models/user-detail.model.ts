@@ -1,4 +1,4 @@
-export class UserDetail {
+export class FzUserDetail {
     id: number;
     fullname: string;
     description: string;

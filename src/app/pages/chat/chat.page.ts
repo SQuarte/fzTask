@@ -1,27 +1,25 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {ActivatedRoute} from '@angular/router';
-import {ChatMessage} from '../../common/models/chat.model';
+import {FzChat} from '../../common/models/chat.model';
 import * as fromChatPage from '../chat/redux/chat-page.reducer';
-import {UserDetailService} from '../../common/services/user-detail.service';
 import {Subscription} from 'rxjs';
-import {AddChatMessage, FetchChatMessages} from './redux/chat-page.actions';
+import {AddChatMessage, FetchChat} from './redux/chat-page.actions';
 import {Location} from '@angular/common';
-import {ChatMessagePageExtModel} from './model/chat-message-page-ext.model';
-import {Content} from '@angular/compiler/src/render3/r3_ast';
+import {FzUserDetailService} from '../../common/services/user-detail.service';
 
 @Component({
-  selector: 'app-chat',
+  selector: 'fz-chat',
   templateUrl: './chat.page.html',
   styleUrls: ['./chat.page.scss']
 })
-export class ChatPageComponent implements OnInit,AfterViewInit {
+export class FzChatPageComponent implements OnInit,AfterViewInit,OnDestroy {
 
 
-  chatMessages: ChatMessagePageExtModel[];
+  chat: FzChat = {} as any;
   userId: number;
   companionId: number;
-  chatName: string;
+
   chatMessagesSubscription: Subscription;
   chatMessageStr: string;
 
@@ -30,7 +28,7 @@ export class ChatPageComponent implements OnInit,AfterViewInit {
 
   constructor(private store: Store<any>,
               private activatedRoute: ActivatedRoute,
-              private userService: UserDetailService,
+              private userService: FzUserDetailService,
               private location: Location) { }
 
   ngOnInit() {
@@ -38,17 +36,14 @@ export class ChatPageComponent implements OnInit,AfterViewInit {
     this.activatedRoute.params.subscribe(
         (params) => {
           this.companionId = params.companionId;
-          this.store.dispatch(new FetchChatMessages(this.userId, this.companionId));
-          this.chatName = this.getChatName(this.userId, this.companionId);
+          this.store.dispatch(new FetchChat(this.userId, this.companionId));
           if (this.chatMessagesSubscription) {
             this.chatMessagesSubscription.unsubscribe();
           }
           this.chatMessagesSubscription = this.store
               .pipe(select(fromChatPage.getChatPageCompanionChat(this.companionId)))
-              .subscribe((messages) => {
-                  this.chatMessages = messages.map((message) =>
-                      Object.assign({} , message, {isOwner: this.isHostMessage(message)})
-                  );
+              .subscribe((chat) => {
+                  this.chat = chat;
               });
         }
     );
@@ -58,9 +53,7 @@ export class ChatPageComponent implements OnInit,AfterViewInit {
       this.scrollToBottom();
   }
 
-
-
-    sendMessage(message: string) {
+  sendMessage(message: string) {
       this.store.dispatch(new AddChatMessage(this.userId, this.companionId, message));
       this.chatMessageStr = '';
       this.scrollToBottom();
@@ -70,16 +63,17 @@ export class ChatPageComponent implements OnInit,AfterViewInit {
       this.location.back();
   }
 
-  private isHostMessage(message: ChatMessage) {
-      return message.ownerId === this.companionId;
-  }
-
-  private getChatName(userId: number, companionId: number) {
-      return `${this.userService.getUserNameById(userId)}&${this.userService.getUserNameById(companionId)}`;
+  ngOnDestroy(): void {
+      this.unsubscribe();
   }
 
   private scrollToBottom() {
       this.content.scrollToBottom();
   }
 
+  private unsubscribe() {
+      if (this.chatMessagesSubscription) {
+          this.unsubscribe()
+      }
+  }
 }

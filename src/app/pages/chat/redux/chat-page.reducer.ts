@@ -1,10 +1,10 @@
-import {ChatMessage} from '../../../common/models/chat.model';
+import {FzChat, FzChatMessage} from '../../../common/models/chat.model';
 import {ChatPageActionsUnion, ChatPageActionTypes} from './chat-page.actions';
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 
 
 export interface ChatPageState {
-    chatsByCompanionId: Map<number, ChatMessage[]>;
+    chatsByCompanionId: Map<number, FzChat>;
 }
 
 const initialState: ChatPageState = {
@@ -14,17 +14,17 @@ const initialState: ChatPageState = {
 
 export function chatPageReducers(state: ChatPageState = initialState, action: ChatPageActionsUnion): ChatPageState {
     switch (action.type) {
-        case ChatPageActionTypes.FetchChatMessages: {
+        case ChatPageActionTypes.FetchChat: {
             return {
                 ...state,
-                chatsByCompanionId: new Map(state.chatsByCompanionId).set(action.companionId, [])
+                chatsByCompanionId: new Map(state.chatsByCompanionId).set(action.companionId, {} as FzChat)
             };
         }
-        case ChatPageActionTypes.FetchChatMessagesComplete:
-        case ChatPageActionTypes.AddChatMessageComplete:{
+        case ChatPageActionTypes.FetchChatComplete:
+        {
             return {
                 ...state,
-                chatsByCompanionId: new Map(state.chatsByCompanionId).set(action.companionId, action.chatMessages)
+                chatsByCompanionId: new Map(state.chatsByCompanionId).set(action.companionId, action.chat)
             };
         }
         default: {

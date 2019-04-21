@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {UserDetail} from '../../../common/models/user-detail.model';
+import {FzUserDetail} from '../../../common/models/user-detail.model';
 
 export enum UserPageActionTypes {
     FetchUser = '[UserPage] Fetch user',
@@ -14,7 +14,7 @@ export class FetchUser implements Action {
 
 export class FetchUserComplete implements Action {
     readonly type = UserPageActionTypes.FetchUserComplete;
-    constructor(public userDetail: UserDetail) {}
+    constructor(public userDetail: FzUserDetail) {}
 }
 
 

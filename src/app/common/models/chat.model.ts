@@ -1,15 +1,17 @@
-export class Chat {
+export class FzChat {
     userId: number;
     companionId: number;
     chatName: string;
-    messages: ChatMessage[];
+    companionAvatarUrl: string;
+    messages: FzChatMessage[];
 }
 
-export class ChatMessage {
+export class FzChatMessage {
     message: string;
     ownerId: number;
     companionId: number;
     date: any;
+    isOwner: boolean;
 
     constructor(ownerId: number, companionId: number, message: string, date: any){
         this.ownerId = ownerId;

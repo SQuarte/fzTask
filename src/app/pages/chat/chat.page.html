@@ -1,4 +1,4 @@
-<app-header></app-header>
+<fz-header></fz-header>
 <ion-content class="fz-chat-content" #content>
   <div class="fz-subheader">
     <ion-toolbar>
@@ -8,12 +8,12 @@
         </ion-button>
       </ion-buttons>
       <ion-title class="fz-subheader-title fz-common-text_purple" text-center>
-        {{chatName}}
+        {{chat.chatName}}
       </ion-title>
     </ion-toolbar>
   </div>
   <div class="fz-flex-container flex-col-dir">
-    <div *ngFor="let message of chatMessages"
+    <div *ngFor="let message of chat.messages"
          class="fz-chat-message-container fz-flex flex-col-dir"
           [ngClass]="{'fz-chat-message-owner' : message.isOwner}">
 

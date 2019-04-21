@@ -1,18 +1,18 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store, select} from '@ngrx/store';
 import {Subscription} from 'rxjs';
-import {UserDetail} from '../../common/models/user-detail.model';
-import * as fromUserPageSelector from './redux/user-detail.reducer';
+import {FzUserDetail} from '../../common/models/user-detail.model';
+import * as fromUserPageSelector from './redux/user-page.reducer';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FetchUser} from './redux/user-page.actions';
 
 @Component({
-  selector: 'app-user',
+  selector: 'fz-user',
   templateUrl: './user.page.html',
   styleUrls: ['./user.page.scss'],
 })
-export class UserPage implements OnInit, OnDestroy {
-  user: UserDetail;
+export class FzUserPage implements OnInit, OnDestroy {
+  user: FzUserDetail;
   userSubscription: Subscription;
   constructor(private store: Store<any>,
               private activatedRoute: ActivatedRoute,
