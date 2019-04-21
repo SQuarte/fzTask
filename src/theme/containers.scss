@@ -1,0 +1,23 @@
+@import './colors';
+.fz-flex-container {
+  display:flex;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.fz-flex{
+  display: flex;
+}
+
+.fz-flex-col {
+  flex-grow: 1;
+}
+
+.fz-subheader {
+  position: fixed;
+  display: flex;
+  background: $fz-white;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid $fz-dark-grey;
+}

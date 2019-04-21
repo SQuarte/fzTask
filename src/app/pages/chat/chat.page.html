@@ -1,0 +1,44 @@
+<app-header></app-header>
+<ion-content class="fz-chat-content" #content>
+  <div class="fz-subheader">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title class="fz-subheader-title fz-common-text_purple" text-center>
+        {{chatName}}
+      </ion-title>
+    </ion-toolbar>
+  </div>
+  <div class="fz-flex-container flex-col-dir">
+    <div *ngFor="let message of chatMessages"
+         class="fz-chat-message-container fz-flex flex-col-dir"
+          [ngClass]="{'fz-chat-message-owner' : message.isOwner}">
+
+      <div class="fz-flex">
+        <span class="fz-chat-message">
+          {{message.message}}
+        </span>
+        <div [ngClass]="(message.isOwner) ? 'fz-arrow-left' : 'fz-arrow-right'"></div>
+        <img class="fz-chat-owner-avatar" src="https://via.placeholder.com/80x50" *ngIf="message.isOwner">
+      </div>
+
+      <span class="fz-chat-date">
+        {{message.date |  date:'dd.MM.yyyy'}}
+      </span>
+    </div>
+
+  </div>
+</ion-content>
+
+
+<ion-footer no-border>
+  <ion-toolbar class="fz-chat-footer">
+      <div class="fz-input-container">
+        <input type="text" placeholder="Type..." [(ngModel)]="chatMessageStr" (keyup.enter)="sendMessage(chatMessageStr)">
+        <button (click)="sendMessage(chatMessageStr)">Send</button>
+      </div>
+  </ion-toolbar>
+</ion-footer>

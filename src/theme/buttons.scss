@@ -1,0 +1,41 @@
+@import './colors';
+.fz-common-text_white {
+  color: #fff
+}
+.fz-common-text_purple {
+  color: $fz-purple
+}
+
+%fz-cb{
+  max-width: 350px;
+  max-height: 50px;
+  padding: 15px 6px 15px 6px;
+  border: 1px solid $fz-purple;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: normal;
+  text-align: center;
+}
+.fz-common-button {
+  @extend %fz-cb;
+  background: $fz-white;
+  color: $fz-purple;
+}
+
+.fz-common-button_reverse {
+  @extend %fz-cb;
+  background: $fz-purple;
+  color: $fz-white;
+}
+
+.fz-common-button_reverse_full_width {
+  @extend %fz-cb;
+  background: $fz-purple;
+  color: $fz-white;
+  max-width: none;
+  width: 100%;
+}
+

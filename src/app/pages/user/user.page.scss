@@ -1,0 +1,63 @@
+.fz-flex-container {
+  margin-top: 20px;
+}
+.fz-user-image-container {
+  img {
+    border-radius: 50%;
+    margin-right: 20px;
+    min-width: 150px;
+    min-height: 150px;
+  }
+}
+
+.fz-subheader {
+  height: 60px;
+}
+
+.fz-subheader-title {
+  .fz-flex-container {
+    margin-top: 0;
+  }
+  .fz-star-buttons {
+    justify-content: center;
+    margin:5px;
+    color: orange;
+  }
+}
+
+.fz-small-title {
+  font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-left: 50px;
+  margin-right: 18px;
+  white-space: nowrap;
+  font-weight: 700;
+  margin-top: 5px
+}
+
+.fz-username-block {
+  margin-top: auto;
+  flex-flow: column;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.fz-follow-block {
+  margin-top: 20px;
+  margin-bottom: auto;
+}
+
+.fz-contact-button {
+  margin-top: 20px;
+}
+.fz-request-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.fz-book-button {
+  font-weight: 600;
+  font-size: 18px;
+}
+

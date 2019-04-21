@@ -1,0 +1,35 @@
+@import './colors';
+.fz-input-container {
+  display: flex;
+  input {
+    flex-grow: 1;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+    height: 60px;
+    border: none;
+    padding-left: 10px;
+  }
+
+  input::placeholder {
+    color: $fz-dark-grey
+  }
+
+  button:before {
+    position: absolute;
+    content: '';
+    width: 3px;
+    height: 40px;
+    background: $fz-light-grey;
+    top: -5px;
+    bottom: 0;
+    right: 90px;
+    transform: translate(0,50%);
+  }
+  button {
+    max-width: 100px;
+    width: 90px;
+    background: $fz-white;
+    color: $fz-purple
+  }
+
+}

@@ -1,0 +1,63 @@
+<app-header></app-header>
+<ion-content>
+  <div class="fz-subheader">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button class="fz-common-text_purple">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title class="fz-subheader-title fz-common-text_purple" text-center>
+        <div class="fz-flex-container flex-col-dir">
+          <span class="fz-small-title">HOW TO BUILD EMOTIONAL SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS</span>
+          <ion-buttons class="fz-star-buttons">
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-half"></ion-icon>
+          </ion-buttons>
+        </div>
+      </ion-title>
+      <ion-buttons class="fz-common-text_purple" slot="primary">
+        <ion-button>
+          <ion-icon name="cloud-upload"></ion-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon name="heart"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </div>
+  <div class="fz-flex-container flex-col-dir">
+    <div class="fz-user-container fz-flex">
+      <div class="fz-user-image-container">
+        <img [src]="user?.imageUrl"/>
+      </div>
+      <div class="fz-flex flex-col-dir">
+        <div class="fz-username-block">{{user?.fullname}}</div>
+        <div class="fz-follow-block fz-common-text_purple">
+          <ion-icon name="person-add"></ion-icon>
+          Follow me
+          <ion-icon name="arrow-forward" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+        </div>
+      </div>
+    </div>
+    <div class="fz-flex flex-col-dir">
+      <button (click)="navigateToChat()"
+              class="fz-contact-button fz-common-button">
+        Contact me
+      </button>
+      <button class="fz-request-button fz-common-button_reverse">Request a  Private Event</button>
+    </div>
+    <div>{{user?.description}}</div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <button class="fz-common-button_reverse_full_width fz-book-button">Book now</button>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
